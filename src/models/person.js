@@ -23,11 +23,17 @@ const PersonSchema = new Schema({
 		type: String,
 		default: shortid.generate
 	},
-	title: {
+	name: {
 		type: String,
 		required: true,
 		trim: true,
 		index: true
+	},
+	dateBirth: {
+		type: Date,
+	},
+	dateDeath: {
+		type: Date,
 	},
 	projectId: {
 		type: String,
@@ -39,7 +45,7 @@ const PersonSchema = new Schema({
 		ref: 'Collection',
 		index: true
 	},
-	description: {
+	bio: {
 		type: String,
 	},
 	metadata: [MetadataSchema],

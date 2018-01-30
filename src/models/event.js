@@ -28,6 +28,15 @@ const EventSchema = new Schema({
 		trim: true,
 		index: true
 	},
+	dateStart: {
+		type: Date,
+	},
+	dateEnd: {
+		type: Date,
+	},
+	dateDisplay: {
+		type: String,
+	},
 	projectId: {
 		type: String,
 		ref: 'Project',
@@ -40,6 +49,11 @@ const EventSchema = new Schema({
 	},
 	description: {
 		type: String,
+	},
+	personId: {
+		type: [String],
+		ref: 'Person',
+		index: true
 	},
 	metadata: [MetadataSchema],
 	private: {

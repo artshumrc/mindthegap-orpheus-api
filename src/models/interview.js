@@ -39,6 +39,11 @@ const InterviewSchema = new Schema({
 		ref: 'Collection',
 		index: true
 	},
+	personId: {
+		type: [String],
+		ref: 'Person',
+		index: true
+	},
 	description: {
 		type: String,
 	},

@@ -5,7 +5,7 @@ import Item from '../../models/item';
 
 const setupAPI = (app) => {
 
-	app.use('/v1/', (req, res) => {
+	app.use('/v1/', async (req, res) => {
 		const apiResponse = {
 			pagination: null,
 			error: null,
@@ -16,7 +16,7 @@ const setupAPI = (app) => {
 		} else {
 			switch (req.query.type) {
 			case 'people':
-				apiResponse.people = [];
+				apiResponse.people = await Person.find();
 				break;
 			case 'interviews':
 				apiResponse.interviews = [];
