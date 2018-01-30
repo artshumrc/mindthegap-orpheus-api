@@ -19,13 +19,13 @@ const setupAPI = (app) => {
 				apiResponse.people = await Person.find();
 				break;
 			case 'interviews':
-				apiResponse.interviews = [];
+				apiResponse.interviews = await Interview.find();
 				break;
 			case 'items':
-				apiResponse.items = [];
+				apiResponse.items = await Item.find();
 				break;
 			case 'events':
-				apiResponse.events = [];
+				apiResponse.events = await Event.find(); 
 				break;
 			default:
 				break;

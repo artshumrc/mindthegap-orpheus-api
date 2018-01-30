@@ -47,6 +47,11 @@ const EventSchema = new Schema({
 		ref: 'Collection',
 		index: true
 	},
+	tagIds: {
+		type: [String],
+		ref: 'Tag',
+		index: true
+	},
 	description: {
 		type: String,
 	},

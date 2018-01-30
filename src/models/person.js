@@ -45,6 +45,11 @@ const PersonSchema = new Schema({
 		ref: 'Collection',
 		index: true
 	},
+	tagIds: {
+		type: [String],
+		ref: 'Tag',
+		index: true
+	},
 	bio: {
 		type: String,
 	},

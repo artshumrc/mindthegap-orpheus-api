@@ -44,6 +44,11 @@ const InterviewSchema = new Schema({
 		ref: 'Person',
 		index: true
 	},
+	tagIds: {
+		type: [String],
+		ref: 'Tag',
+		index: true
+	},
 	description: {
 		type: String,
 	},
