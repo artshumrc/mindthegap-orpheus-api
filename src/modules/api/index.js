@@ -33,8 +33,8 @@ const setupAPI = (app) => {
 											.limit(limit);
 				apiResponse.pagination = {
 					numFound: await Person.count(),
-					query: '',
-					sort: '',
+					query: req.query,
+					sort: 'name',
 					limit,
 					offset,
 				};
@@ -46,8 +46,8 @@ const setupAPI = (app) => {
 																		.limit(limit);
 				apiResponse.pagination = {
 					numFound: await Interview.count(),
-					query: '',
-					sort: '',
+					query: req.query,
+					sort: 'title',
 					limit,
 					offset,
 				};
@@ -59,8 +59,8 @@ const setupAPI = (app) => {
 																.limit(limit);
 				apiResponse.pagination = {
 					numFound: await Item.count(),
-					query: '',
-					sort: '',
+					query: req.query,
+					sort: 'title',
 					limit,
 					offset,
 				};
@@ -72,8 +72,8 @@ const setupAPI = (app) => {
 																.limit(limit);
 				apiResponse.pagination = {
 					numFound: await Event.count(),
-					query: '',
-					sort: '',
+					query: req.query, 
+					sort: 'title',
 					limit,
 					offset,
 				};
