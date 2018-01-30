@@ -40,11 +40,6 @@ const PersonSchema = new Schema({
 		ref: 'Project',
 		index: true
 	},
-	collectionId: {
-		type: [String],
-		ref: 'Collection',
-		index: true
-	},
 	tagIds: {
 		type: [String],
 		ref: 'Tag',
