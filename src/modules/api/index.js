@@ -10,29 +10,80 @@ const setupAPI = (app) => {
 			pagination: null,
 			error: null,
 		};
+		let offset = 0;
+		let limit = 10;
 
 		if (!req.query || !req.query.type) {
 			apiResponse.error = 'Must provide type for input parameters query (e.g. ?type=people)';
 		} else {
+			if (req.query.offset) {
+				offset = req.query.offset;
+			}
+
+			if (req.query.limit) {
+				limit = req.query.limit;
+			}
+
+
 			switch (req.query.type) {
 			case 'people':
-				apiResponse.people = await Person.find();
+				apiResponse.people = await Person.find()
+									.sort('name')
+											.skip(offset)
+											.limit(limit);
+				apiResponse.pagination = {
+					numFound: await Person.count(),
+					query: '',
+					sort: '',
+					limit,
+					offset,
+				};
 				break;
 			case 'interviews':
-				apiResponse.interviews = await Interview.find();
+				apiResponse.interviews = await Interview.find()
+																	.sort('title')
+																		.skip(offset)
+																		.limit(limit);
+				apiResponse.pagination = {
+					numFound: await Interview.count(),
+					query: '',
+					sort: '',
+					limit,
+					offset,
+				};
 				break;
 			case 'items':
-				apiResponse.items = await Item.find();
+				apiResponse.items = await Item.find()
+															.sort('title')
+																.skip(offset)
+																.limit(limit);
+				apiResponse.pagination = {
+					numFound: await Item.count(),
+					query: '',
+					sort: '',
+					limit,
+					offset,
+				};
 				break;
 			case 'events':
-				apiResponse.events = await Event.find(); 
+				apiResponse.events = await Event.find()
+															.sort('title')
+																.skip(offset)
+																.limit(limit);
+				apiResponse.pagination = {
+					numFound: await Event.count(),
+					query: '',
+					sort: '',
+					limit,
+					offset,
+				};
 				break;
 			default:
 				break;
 			}
 		}
 
-    // sent response
+		// sent response
 		res.send(apiResponse);
 	});
 };
