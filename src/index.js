@@ -43,6 +43,10 @@ import authenticationRouter from './authentication/routes';
 // services
 import ManifestService from './graphql/logic/manifests';
 
+// API
+import setupAPI from './modules/api';
+
+
 // environment variables setup
 dotenvSetup();
 
@@ -82,6 +86,9 @@ authSetup(app, redisClient);
 
 // GraphQl setup
 setupGraphql(app);
+
+// traditional API setup
+setupAPI(app);
 
 // S3 setup
 s3Setup(app);
