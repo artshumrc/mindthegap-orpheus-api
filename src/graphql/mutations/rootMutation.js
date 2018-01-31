@@ -4,6 +4,9 @@ import articleMutationFields from './articles';
 import projectMutationFields from './projects';
 import collectionMutationFields from './collections';
 import itemMutationFields from './items';
+import eventMutationFields from './events';
+import interviewMutationFields from './interviews';
+import personMutationFields from './persons';
 import textMutationFields from './texts';
 import userMutationFields from './users';
 
@@ -19,6 +22,9 @@ const RootMutations = new GraphQLObjectType({
 		...articleMutationFields,
 		...collectionMutationFields,
 		...itemMutationFields,
+		...eventMutationFields,
+		...interviewMutationFields,
+		...personMutationFields,
 		...textMutationFields,
 		...userMutationFields,
 	},

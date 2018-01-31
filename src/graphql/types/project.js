@@ -16,6 +16,9 @@ import ProjectService from '../logic/projects';
 import TextService from '../logic/texts';
 import UserService from '../logic/users';
 import PageService from '../logic/pages';
+import EventService from '../logic/events';
+import InterviewService from '../logic/interviews';
+import PersonService from '../logic/persons';
 
 // types
 import CollectionType from './collection';
@@ -257,8 +260,24 @@ const config = {
 				return itemService.count({ projectId: parent._id });
 			}
 		},
+		interview: {
+			type: InterviewType,
+			description: 'Get interview document',
+			args: {
+				_id: {
+					type: GraphQLString,
+				},
+				slug: {
+					type: GraphQLString,
+				},
+			},
+			resolve(parent, { _id, slug }, { token }) {
+				const interviewService = new InterviewService(token);
+				return interviewService.getInterview({ projectId: parent._id, _id, slug });
+			}
+		},
 		interviews: {
-			type: new GraphQLList(ItemType),
+			type: new GraphQLList(InterviewType),
 			description: 'Get list of interviews',
 			args: {
 				textsearch: {
@@ -272,21 +291,37 @@ const config = {
 				},
 			},
 			resolve(parent, { textsearch, limit, offset }, { token }) {
-				const itemService = new ItemService(token);
-				return itemService.getItems({ projectId: parent._id, textsearch, limit, offset });
+				const interviewService = new InterviewService(token);
+				return interviewService.getInterviews({ projectId: parent._id, textsearch, limit, offset });
 			}
 		},
 		interviewsCount: {
 			type: GraphQLInt,
 			description: 'Get count of interviews in project',
 			resolve(parent, _, { token }) {
-				const itemService = new ItemService(token);
-				return itemService.count({ projectId: parent._id });
+				const interviewService = new InterviewService(token);
+				return interviewService.count({ projectId: parent._id });
+			}
+		},
+		event: {
+			type: EventType,
+			description: 'Get event document',
+			args: {
+				_id: {
+					type: GraphQLString,
+				},
+				slug: {
+					type: GraphQLString,
+				},
+			},
+			resolve(parent, { _id, slug }, { token }) {
+				const eventService = new EventService(token);
+				return eventService.getEvent({ projectId: parent._id, _id, slug });
 			}
 		},
 		events: {
-			type: new GraphQLList(ItemType),
-			description: 'Get list of interviews',
+			type: new GraphQLList(EventType),
+			description: 'Get list of events',
 			args: {
 				textsearch: {
 					type: GraphQLString,
@@ -299,21 +334,37 @@ const config = {
 				},
 			},
 			resolve(parent, { textsearch, limit, offset }, { token }) {
-				const itemService = new ItemService(token);
-				return itemService.getItems({ projectId: parent._id, textsearch, limit, offset });
+				const eventService = new EventService(token);
+				return eventService.getEvents({ projectId: parent._id, textsearch, limit, offset });
 			}
 		},
 		eventsCount: {
 			type: GraphQLInt,
-			description: 'Get count of interviews in project',
+			description: 'Get count of events in project',
 			resolve(parent, _, { token }) {
-				const itemService = new ItemService(token);
-				return itemService.count({ projectId: parent._id });
+				const eventService = new EventService(token);
+				return eventService.count({ projectId: parent._id });
+			}
+		},
+		person: {
+			type: PersonType,
+			description: 'Get person document',
+			args: {
+				_id: {
+					type: GraphQLString,
+				},
+				slug: {
+					type: GraphQLString,
+				},
+			},
+			resolve(parent, { _id, slug }, { token }) {
+				const personService = new PersonService(token);
+				return personService.getPerson({ projectId: parent._id, _id, slug });
 			}
 		},
 		people: {
-			type: new GraphQLList(ItemType),
-			description: 'Get list of interviews',
+			type: new GraphQLList(PersonType),
+			description: 'Get list of people',
 			args: {
 				textsearch: {
 					type: GraphQLString,
@@ -326,16 +377,16 @@ const config = {
 				},
 			},
 			resolve(parent, { textsearch, limit, offset }, { token }) {
-				const itemService = new ItemService(token);
-				return itemService.getItems({ projectId: parent._id, textsearch, limit, offset });
+				const personService = new PersonService(token);
+				return personService.getPersons({ projectId: parent._id, textsearch, limit, offset });
 			}
 		},
 		peopleCount: {
 			type: GraphQLInt,
-			description: 'Get count of interviews in project',
+			description: 'Get count of people in project',
 			resolve(parent, _, { token }) {
-				const itemService = new ItemService(token);
-				return itemService.count({ projectId: parent._id });
+				const personService = new PersonService(token);
+				return personService.count({ projectId: parent._id });
 			}
 		},
 		files: {
