@@ -199,12 +199,13 @@ export default class PersonService extends PermissionsService {
 
 		// Initiate new person
 		person.projectId = project._id;
-		person.slug = _s.slugify(person.title);
+		console.log(person);
+		person.slug = _s.slugify(person.name);
 		const newPerson = new Person(person);
 
 		await newPerson.save();
 
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, newPerson, files);
 			await saveManifest(project, newPerson, files);
 		}

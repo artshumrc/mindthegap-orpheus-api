@@ -60,7 +60,7 @@ const PersonSchema = new Schema({
 PersonSchema.plugin(timestamp);
 
 // add slug (slug)
-PersonSchema.plugin(URLSlugs('title', {
+PersonSchema.plugin(URLSlugs('name', {
 	indexUnique: false,
 }));
 
