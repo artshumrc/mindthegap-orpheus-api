@@ -204,7 +204,7 @@ export default class EventService extends PermissionsService {
 
 		await newEvent.save();
 
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, newEvent, files);
 			await saveManifest(project, newEvent, files);
 		}
@@ -235,7 +235,7 @@ export default class EventService extends PermissionsService {
 		const updatedEvent = await Event.findById(event._id);
 
 		// save files and add ids to event
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, updatedEvent, files);
 			await saveManifest(project, updatedEvent, files);
 		}

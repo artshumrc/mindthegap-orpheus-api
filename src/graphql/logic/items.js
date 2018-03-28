@@ -204,7 +204,7 @@ export default class ItemService extends PermissionsService {
 
 		await newItem.save();
 
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, newItem, files);
 			await saveManifest(project, newItem, files);
 		}
@@ -235,7 +235,7 @@ export default class ItemService extends PermissionsService {
 		const updatedItem = await Item.findById(item._id);
 
 		// save files and add ids to item
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, updatedItem, files);
 			await saveManifest(project, updatedItem, files);
 		}

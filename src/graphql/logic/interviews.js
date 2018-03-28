@@ -204,7 +204,7 @@ export default class InterviewService extends PermissionsService {
 
 		await newInterview.save();
 
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, newInterview, files);
 			await saveManifest(project, newInterview, files);
 		}
@@ -235,7 +235,7 @@ export default class InterviewService extends PermissionsService {
 		const updatedInterview = await Interview.findById(interview._id);
 
 		// save files and add ids to interview
-		if (files) {
+		if (files && files.length) {
 			await saveFiles(project, updatedInterview, files);
 			await saveManifest(project, updatedInterview, files);
 		}
