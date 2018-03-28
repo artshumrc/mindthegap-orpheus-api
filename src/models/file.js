@@ -38,6 +38,21 @@ const FileSchema = new Schema({
 		ref: 'Item',
 		index: true
 	},
+	personId: {
+		type: String,
+		ref: 'Person',
+		index: true
+	},
+	eventId: {
+		type: String,
+		ref: 'Event',
+		index: true
+	},
+	interviewId: {
+		type: String,
+		ref: 'Interview',
+		index: true
+	},
 	type: {
 		type: String,
 	},

@@ -49,10 +49,10 @@ export default class FileService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of files
 	 */
-	async getFiles({ projectId, itemId, textsearch, offset, limit }) {
+	async getFiles({ projectId, itemId, personId, eventId, interviewId, textsearch, offset, limit }) {
 		const args = {};
 
-		if (!projectId && !itemId) {
+		if (!projectId && !itemId && !personId && !eventId && !interviewId) {
 			return [];
 		}
 
@@ -62,6 +62,22 @@ export default class FileService extends PermissionsService {
 
 		if (itemId) {
 			args.itemId = itemId;
+		}
+
+		if (itemId) {
+			args.itemId = itemId;
+		}
+
+		if (personId) {
+			args.personId = personId;
+		}
+
+		if (eventId) {
+			args.eventId = eventId;
+		}
+
+		if (interviewId) {
+			args.interviewId = interviewId;
 		}
 
 		if (textsearch) {

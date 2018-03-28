@@ -29,9 +29,10 @@ const config = {
 		files: {
 			type: new GraphQLList(FileType),
 			description: 'Get person files',
-			resolve(person, args, { token }) {
+			async resolve(person, args, { token }) {
 				const fileService = new FileService(token);
-				return fileService.getFiles({ personId: person._id });
+				const files = await fileService.getFiles({ personId: person._id });
+				return files;
 			}
 		},
 		filesCount: {
