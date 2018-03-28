@@ -1,4 +1,5 @@
 // main
+import 'babel-polyfill';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
