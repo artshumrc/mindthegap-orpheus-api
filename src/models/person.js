@@ -53,6 +53,21 @@ const PersonSchema = new Schema({
 		type: Boolean,
 		default: false,
 	},
+	events: {
+		type: [String],
+		ref: 'Event',
+		index: true
+	},
+	interviews: {
+		type: [String],
+		ref: 'Interview',
+		index: true
+	},
+	items: {
+		type: [String],
+		ref: 'Item',
+		index: true
+	},
 });
 
 

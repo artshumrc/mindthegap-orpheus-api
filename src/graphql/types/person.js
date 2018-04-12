@@ -115,7 +115,7 @@ const configInput = {
 	exclude: ['createdAt', 'updatedAt'],
 	extend: {
 		metadata: {
-			type: new GraphQLList(MetadataInputType)
+			type: new GraphQLList(MetadataInputType),
 		},
 	}
 };
