@@ -14,7 +14,49 @@ const setupAPI = (app) => {
 		let limit = 10;
 
 		if (!req.query || !req.query.type) {
-			apiResponse.error = 'Must provide type for input parameters query (e.g. ?type=people)';
+
+			// apiResponse.error = 'Must provide type for input parameters query (e.g. ?type=people)';
+			// For the moment, if no query, just return everything
+			const relationships = [];
+
+			const people = await Person.find()
+								.sort('name');
+
+			const interviews = await Interview.find()
+								.sort('title');
+
+			const items = await Item.find()
+								.sort('title');
+
+			const events = await Event.find()
+								.sort('title');
+
+			apiResponse.nodes = [...people, ...interviews, ...items, ...events];
+
+			apiResponse.edges = [];
+			people.forEach((person) => {
+				person.events.forEach((event) => {
+					apiResponse.edges.push({
+						source: person._id,
+						target: event,
+					});
+				});
+				person.interviews.forEach((interview) => {
+					apiResponse.edges.push({
+						source: person._id,
+						target: interview,
+					});
+				});
+				person.items.forEach((item) => {
+					apiResponse.edges.push({
+						source: person._id,
+						target: item,
+					});
+				});
+			});
+
+
+
 		} else {
 			if (req.query.offset) {
 				offset = req.query.offset;
@@ -72,7 +114,7 @@ const setupAPI = (app) => {
 																.limit(limit);
 				apiResponse.pagination = {
 					numFound: await Event.count(),
-					query: req.query, 
+					query: req.query,
 					sort: 'title',
 					limit,
 					offset,
