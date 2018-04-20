@@ -47,15 +47,21 @@ const saveFiles = async (project, item, files) => {
 const saveManifest = async (project, item, files) => {
 	const images = [];
 	files.forEach((file) => {
-		let newImageName = file.name;
-		newImageName = newImageName.replace(`${file._id}-`, '');
+		if (file.type && file.type.startsWith('image')) {
+			let newImageName = file.name;
+			newImageName = newImageName.replace(`${file._id}-`, '');
 
-		images.push({
-			_id: file._id,
-			name: newImageName,
-			label: file.title,
-		});
+			images.push({
+				_id: file._id,
+				name: newImageName,
+				label: file.title,
+			});
+		}
 	});
+
+	if (!images.length) {
+		return null;
+	}
 
 	// update item manifest
 	const manifest = {
