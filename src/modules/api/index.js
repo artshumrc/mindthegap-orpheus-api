@@ -3,6 +3,18 @@ import Interview from '../../models/interview';
 import Event from '../../models/event';
 import Item from '../../models/item';
 
+
+const addType = (arr, type) => {
+	const _arr = [];
+	arr.forEach((obj) => {
+		// treat mongoose collection object class just like an object
+		const _obj = Object.assign({}, obj._doc);
+		_obj.type = type;
+		_arr.push(_obj);
+	});
+	return _arr;
+};
+
 const setupAPI = (app) => {
 
 	app.use('/v1/', async (req, res) => {
@@ -19,17 +31,21 @@ const setupAPI = (app) => {
 			// For the moment, if no query, just return everything
 			const relationships = [];
 
-			const people = await Person.find()
+			let people = await Person.find()
 								.sort('name');
+			people = addType(people, 'person');
 
-			const interviews = await Interview.find()
+			let interviews = await Interview.find()
 								.sort('title');
+			interviews = addType(interviews, 'interview');
 
-			const items = await Item.find()
+			let items = await Item.find()
 								.sort('title');
+			items = addType(items, 'item');
 
-			const events = await Event.find()
+			let events = await Event.find()
 								.sort('title');
+			events = addType(events, 'event');
 
 			apiResponse.nodes = [...people, ...interviews, ...items, ...events];
 
