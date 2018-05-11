@@ -14,7 +14,14 @@ import { validateTokenOAuth1, validateTokenOAuth2 } from '../../authentication';
  * @param  {String} password Password
  */
 export const loginPWD = async (res, username, password) => {
-	const user = await User.findByUsername(username);
+	const user = await User.findOne({
+		$or: [{
+			email: username,
+		}, {
+			username,
+		}]
+	});
+
 	if (user) {
 		user.authenticate(password, (_, isValid, message) => {
 			if (isValid) {
