@@ -52,22 +52,28 @@ const setupAPI = (app) => {
 			apiResponse.edges = [];
 			people.forEach((person) => {
 				person.events.forEach((event) => {
-					apiResponse.edges.push({
-						source: person._id,
-						target: event,
-					});
+					if (event) {
+						apiResponse.edges.push({
+							source: person._id,
+							target: event,
+						});
+					}
 				});
 				person.interviews.forEach((interview) => {
-					apiResponse.edges.push({
-						source: person._id,
-						target: interview,
-					});
+					if (interview) {
+						apiResponse.edges.push({
+							source: person._id,
+							target: interview,
+						});
+					}
 				});
 				person.items.forEach((item) => {
-					apiResponse.edges.push({
-						source: person._id,
-						target: item,
-					});
+					if (item) {
+						apiResponse.edges.push({
+							source: person._id,
+							target: item,
+						});
+					}
 				});
 			});
 
