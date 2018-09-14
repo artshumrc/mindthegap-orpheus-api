@@ -35,20 +35,24 @@ export default class NodeService extends PermissionsService {
 
 		if (event) {
 			node = event;
+			node.collectionType = 'event';
 		}
 
 		if (interview) {
 			node = interview;
+			node.collectionType = 'interview';
 		}
 
 		if (item) {
 			node = item;
+			node.collectionType = 'item';
 		}
 
 		if (person) {
 			node = person;
 			node.title = person.name;
 			node.description = person.bio;
+			node.collectionType = 'person';
 		}
 
 		return node;

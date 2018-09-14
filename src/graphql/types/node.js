@@ -26,12 +26,42 @@ const config = {
 	schema: Node.schema,
 	exclude: [],
 	extend: {
+		collectionType: {
+			type: GraphQLString,
+		},
 		files: {
 			type: new GraphQLList(FileType),
 			description: 'Get item files',
-			resolve(item, args, { token }) {
+			resolve(parent, args, { token }) {
 				const fileService = new FileService(token);
-				return fileService.getFiles({ itemId: item._id });
+
+				let eventId;
+				let interviewId;
+				let itemId;
+				let personId;
+
+				switch (parent.collectionType) {
+				case 'event':
+					eventId = parent._id;
+					break;
+				case 'interview':
+					interviewId = parent._id;
+					break;
+				case 'person':
+					personId = parent._id;
+					break;
+				default:
+					itemId = parent._id;
+					break;
+				}
+
+
+				return fileService.getFiles({
+					eventId,
+					interviewId,
+					itemId,
+					personId,
+				});
 			}
 		},
 		filesCount: {
