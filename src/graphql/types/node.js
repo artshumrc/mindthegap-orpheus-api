@@ -29,6 +29,15 @@ const config = {
 		collectionType: {
 			type: GraphQLString,
 		},
+		events: {
+			type: new GraphQLList(GraphQLString),
+		},
+		interviews: {
+			type: new GraphQLList(GraphQLString),
+		},
+		items: {
+			type: new GraphQLList(GraphQLString),
+		},
 		files: {
 			type: new GraphQLList(FileType),
 			description: 'Get item files',
