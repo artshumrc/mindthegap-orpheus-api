@@ -32,8 +32,12 @@ export default class PageService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of pages
 	 */
-	async getPages({ projectId, textsearch, offset, limit }) {
+	async getPages({ projectId, _ids, textsearch, offset, limit }) {
 		const args = { projectId };
+
+		if (_ids) {
+			args._id = { $in: _ids };
+		}
 
 		if (textsearch) {
 			args.title = /.*${textsearch}.*/;

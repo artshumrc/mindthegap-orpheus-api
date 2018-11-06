@@ -128,7 +128,7 @@ export default class EventService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of events
 	 */
-	async getEvents({ projectId, collectionId, textsearch, offset, limit }) {
+	async getEvents({ projectId, collectionId, _ids, textsearch, offset, limit }) {
 		const args = {};
 
 		if (!projectId && !collectionId) {
@@ -141,6 +141,10 @@ export default class EventService extends PermissionsService {
 
 		if (collectionId) {
 			args.collectionId = collectionId;
+		}
+
+		if (_ids) {
+			args._id = { $in: _ids };
 		}
 
 		if (textsearch) {

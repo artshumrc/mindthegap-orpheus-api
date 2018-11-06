@@ -34,11 +34,15 @@ export default class CollectionService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of collections
 	 */
-	async getCollections({ projectId, textsearch, offset, limit }) {
+	async getCollections({ projectId, _ids, textsearch, offset, limit }) {
 		const args = { projectId };
 
 		if (textsearch) {
 			args.title = /.*${textsearch}.*/;
+		}
+
+		if (_ids) {
+			args._id = { $in: _ids };
 		}
 
 		return await Collection.find(args)

@@ -128,7 +128,7 @@ export default class InterviewService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of interviews
 	 */
-	async getInterviews({ projectId, collectionId, textsearch, offset, limit }) {
+	async getInterviews({ projectId, collectionId, _ids, textsearch, offset, limit }) {
 		const args = {};
 
 		if (!projectId && !collectionId) {
@@ -141,6 +141,10 @@ export default class InterviewService extends PermissionsService {
 
 		if (collectionId) {
 			args.collectionId = collectionId;
+		}
+
+		if (_ids) {
+			args._id = { $in: _ids };
 		}
 
 		if (textsearch) {
