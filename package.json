@@ -47,6 +47,7 @@
     "morgan": "^1.8.2",
     "nodemailer": "^4.1.0",
     "oauth-shim": "^1.1.1",
+    "orpheus-tools": "http://gitlab.archimedes.digital/archimedes/orpheus-tools.git#develop",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local-mongoose": "^4.0.0",
@@ -104,7 +105,8 @@
     "db:setup": "npm run db:clear && npm run db:seed",
     "build": "babel src -d build",
     "execute": "yarn pm2 start build --name express",
-    "jsdoc": "jsdoc src -r -c .jsdoc.json -d docs"
+    "jsdoc": "jsdoc src -r -c .jsdoc.json -d docs",
+    "migration:orpheus": "babel-node scripts/migrate-to-orpheus"
   },
   "pre-commit": "lint:staged",
   "lint-staged": {
