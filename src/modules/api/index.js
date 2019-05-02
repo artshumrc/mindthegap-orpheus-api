@@ -2,6 +2,7 @@ import Person from '../../models/person';
 import Interview from '../../models/interview';
 import Event from '../../models/event';
 import Item from '../../models/item';
+import File from '../../models/file';
 
 
 const addType = (arr, type) => {
@@ -31,6 +32,9 @@ const setupAPI = (app) => {
 			// For the moment, if no query, just return everything
 			const relationships = [];
 
+			let files = await File.find();
+			files = addType(files, 'file');
+
 			let people = await Person.find()
 								.sort('name');
 			people = addType(people, 'person');
@@ -48,6 +52,15 @@ const setupAPI = (app) => {
 			events = addType(events, 'event');
 
 			apiResponse.nodes = [...people, ...interviews, ...items, ...events];
+
+			apiResponse.nodes.forEach((node) => {
+				files.forEach((file) => {
+					if (file.projectId == node._id || file.interviewId == node._id || file.eventId == node._id || file.personId == node._id) {
+						node.files = node.files || [];
+						node.files.push(file);
+					}
+				});
+			});
 
 			apiResponse.edges = [];
 			people.forEach((person) => {
