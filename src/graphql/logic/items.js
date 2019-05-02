@@ -134,7 +134,7 @@ export default class ItemService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of items
 	 */
-	async getItems({ projectId, collectionId, textsearch, offset, limit }) {
+	async getItems({ projectId, collectionId, _ids, textsearch, offset, limit }) {
 		const args = {};
 
 		if (!projectId && !collectionId) {
@@ -147,6 +147,10 @@ export default class ItemService extends PermissionsService {
 
 		if (collectionId) {
 			args.collectionId = collectionId;
+		}
+
+		if (_ids) {
+			args._id = { $in: _ids };
 		}
 
 		if (textsearch) {

@@ -33,11 +33,15 @@ export default class ArticleService extends PermissionsService {
 	 * @param {number} limit
 	 * @returns {Object[]} array of articles
 	 */
-	async getArticles({ projectId, textsearch, offset, limit }) {
+	async getArticles({ projectId, _ids, textsearch, offset, limit }) {
 		const args = { projectId };
 
 		if (textsearch) {
 			args.title = /.*${textsearch}.*/;
+		}
+
+		if (_ids) {
+			args._id = { $in: _ids };
 		}
 
 		return await Article.find(args)

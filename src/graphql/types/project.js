@@ -63,6 +63,9 @@ const config = {
 			type: new GraphQLList(CollectionType),
 			description: 'Get list of collections',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -73,9 +76,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const collectionService = new CollectionService(token);
-				return collectionService.getCollections({ projectId: parent._id, textsearch, limit, offset });
+				return collectionService.getCollections({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		collectionsCount: {
@@ -109,6 +112,9 @@ const config = {
 			type: new GraphQLList(ArticleType),
 			description: 'Get list of articles',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -119,9 +125,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const articleService = new ArticleService(token);
-				return articleService.getArticles({ projectId: parent._id, textsearch, limit, offset });
+				return articleService.getArticles({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		articlesCount: {
@@ -155,6 +161,9 @@ const config = {
 			type: new GraphQLList(PageType),
 			description: 'Get list of pages',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -165,9 +174,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const pageService = new PageService(token);
-				return pageService.getPages({ projectId: parent._id, textsearch, limit, offset });
+				return pageService.getPages({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		pagesCount: {
@@ -237,6 +246,9 @@ const config = {
 			type: new GraphQLList(ItemType),
 			description: 'Get list of items',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -247,9 +259,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const itemService = new ItemService(token);
-				return itemService.getItems({ projectId: parent._id, textsearch, limit, offset });
+				return itemService.getItems({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		itemsCount: {
@@ -280,6 +292,9 @@ const config = {
 			type: new GraphQLList(InterviewType),
 			description: 'Get list of interviews',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -290,9 +305,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const interviewService = new InterviewService(token);
-				return interviewService.getInterviews({ projectId: parent._id, textsearch, limit, offset });
+				return interviewService.getInterviews({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		interviewsCount: {
@@ -323,6 +338,9 @@ const config = {
 			type: new GraphQLList(EventType),
 			description: 'Get list of events',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -333,9 +351,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const eventService = new EventService(token);
-				return eventService.getEvents({ projectId: parent._id, textsearch, limit, offset });
+				return eventService.getEvents({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		eventsCount: {
@@ -366,6 +384,9 @@ const config = {
 			type: new GraphQLList(PersonType),
 			description: 'Get list of people',
 			args: {
+				_ids: {
+					type: new GraphQLList(GraphQLString),
+				},
 				textsearch: {
 					type: GraphQLString,
 				},
@@ -376,9 +397,9 @@ const config = {
 					type: GraphQLInt,
 				},
 			},
-			resolve(parent, { textsearch, limit, offset }, { token }) {
+			resolve(parent, { _ids, textsearch, limit, offset }, { token }) {
 				const personService = new PersonService(token);
-				return personService.getPersons({ projectId: parent._id, textsearch, limit, offset });
+				return personService.getPersons({ projectId: parent._id, _ids, textsearch, limit, offset });
 			}
 		},
 		peopleCount: {
