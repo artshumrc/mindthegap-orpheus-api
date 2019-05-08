@@ -26,7 +26,7 @@ db.on('error', winston.error)
 		} catch (err) {
 			winston.error(err);
 		}
-		winston.info('Generated users');
+		winston.info('Generated users', ids.users);
 
 		// generate projects with users
 		try {

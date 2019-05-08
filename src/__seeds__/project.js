@@ -20,6 +20,7 @@ const generateProjects = async (count, userIds) => {
 			url: faker.internet.url(),
 			address: faker.address.streetAddress(),
 			phone: faker.phone.phoneNumber(),
+			status: 'private',
 			users: [{
 				userId: getRandom(userIds),
 				role: 'admin',

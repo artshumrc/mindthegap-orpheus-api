@@ -63,7 +63,14 @@ db.on('error', console.error)
 				type: 'text',
 				label: 'Type',
 				value: 'Item',
-			}); // add Type
+			}); 
+			if (mtgItem.personId) {
+				transformedItem.metadata.push({
+					type: 'item',
+					label: 'Person',
+					value: JSON.stringify([{_id: mtgItem.personId}]),
+				}); 
+			}
 			
 
 			//
@@ -155,6 +162,13 @@ db.on('error', console.error)
 					value: mtgItem.dateDisplay,
 				}); 
 			}
+			if (mtgItem.personId) {
+				transformedItem.metadata.push({
+					type: 'item',
+					label: 'Person',
+					value: JSON.stringify([{_id: mtgItem.personId}]),
+				}); 
+			}
 
 			//
 			// build files
@@ -227,6 +241,13 @@ db.on('error', console.error)
 				label: 'Type',
 				value: 'Interview',
 			}); 
+			if (mtgItem.personId) {
+				transformedItem.metadata.push({
+					type: 'item',
+					label: 'Person',
+					value: JSON.stringify([{_id: mtgItem.personId}]),
+				}); 
+			}
 
 
 			//
@@ -321,6 +342,24 @@ db.on('error', console.error)
 					value: mtgItem.bio,
 				}); 
 			}
+			const personEvents = mtgItem.events.map(eventID => ({_id: eventID}));
+			transformedItem.metadata.push({
+				type: 'item',
+				label: 'Events',
+				value: JSON.stringify(personEvents),
+			}); 
+			const personInterviews = mtgItem.interviews.map(interviewID => ({_id: interviewID}));
+			transformedItem.metadata.push({
+				type: 'item',
+				label: 'Interviews',
+				value: JSON.stringify(personInterviews),
+			}); 
+			const personItems = mtgItem.items.map(itemID => ({_id: itemID}));
+			transformedItem.metadata.push({
+				type: 'item',
+				label: 'Items',
+				value: JSON.stringify(personItems),
+			}); 
 
 
 			//
